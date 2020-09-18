@@ -8,10 +8,14 @@ public class JDBCExample {
     public static void main(String[] args) {
     List<Employee> employeeList = new ArrayList<Employee>();
     String sql_select = "Select * from Users";
+    String sql_insert = "Insert into Users values (3," + "' Ekaterina'," + "' Stepanova'," + "'woman'," +  "'1990.12.03')";
 
         try (Connection conn = DriverManager.getConnection(
                 "jdbc:postgresql://127.0.0.1:5432/shop", "postgres", "82469173");
+        Statement statement1 = conn.createStatement();
+
         PreparedStatement statement = conn.prepareStatement(sql_select)) {
+            statement1.executeUpdate(sql_insert);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("UserID");
